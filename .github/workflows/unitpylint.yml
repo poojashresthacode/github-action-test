@@ -1,0 +1,32 @@
+name: Unit Testing
+
+on:
+  push:
+    branches:
+      - main  # Adjust to your main branch name
+
+jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x  # Adjust to your Python version
+
+    - name: Install dependencies
+      run: pip install pytest
+
+    - name: Run Unit Tests
+      run: pytest  # Adjust to the testing command, e.g., 'python -m unittest' for unittest
+
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: test-results
